@@ -2,22 +2,35 @@
    SANDHYA WEB STUDIO - INTERACTIVE JAVASCRIPT LOGIC
    ========================================================================== */
 
-// Currency Rates & Symbols Definition
+// Currency Rates & Symbols Definition (INR as baseline)
 const CURRENCIES = {
-  USD: { symbol: '$', rate: 1.0 },
-  INR: { symbol: '₹', rate: 50.0 }, // Tailored agency rate factor for easy rounding
-  EUR: { symbol: '€', rate: 0.92 },
-  GBP: { symbol: '£', rate: 0.80 }
+  INR: { symbol: 'Rs ', suffix: '/-', rate: 1.0 },
+  USD: { symbol: '$', suffix: '', rate: 0.012 },
+  EUR: { symbol: '€', suffix: '', rate: 0.011 },
+  GBP: { symbol: '£', suffix: '', rate: 0.0095 }
 };
 
-let currentCurrency = 'USD';
+let currentCurrency = 'INR';
 let currentCalcType = 'simple'; // 'simple' or 'ecommerce'
+const WHATSAPP_PHONE = '917530989390'; // Updated WhatsApp Number
 
 // Initialize Page Logic
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('currentYear').textContent = new Date().getFullYear();
   recalculatePrice();
+  initSocialProofToasts();
 });
+
+// Mobile Navigation Toggle
+function toggleMobileMenu() {
+  const navLinks = document.getElementById('navLinks');
+  navLinks.classList.toggle('mobile-active');
+}
+
+function closeMobileMenu() {
+  const navLinks = document.getElementById('navLinks');
+  navLinks.classList.remove('mobile-active');
+}
 
 // Switch Currency Function
 function updateCurrency(newCurr) {
@@ -29,23 +42,29 @@ function updateCurrency(newCurr) {
   // Update Package Tier Prices
   const pkgPrices = document.querySelectorAll('.pkg-price');
   pkgPrices.forEach(el => {
-    const usdVal = parseFloat(el.getAttribute('data-usd'));
-    const converted = Math.round(usdVal * currObj.rate);
-    el.textContent = `${currObj.symbol}${converted.toLocaleString()}`;
+    const inrVal = parseFloat(el.getAttribute('data-inr'));
+    if (!isNaN(inrVal)) {
+      const converted = Math.round(inrVal * currObj.rate);
+      const isUpto = el.textContent.includes('Upto');
+      const isPlus = el.textContent.includes('+');
+      const prefixStr = isUpto ? 'Upto ' : '';
+      const suffixStr = isPlus ? '/+' : currObj.suffix;
+      el.textContent = `${prefixStr}${currObj.symbol}${converted.toLocaleString()}${suffixStr}`;
+    }
   });
 
   // Update Addon Prices Labels
   const addonPrices = document.querySelectorAll('.addon-price');
   addonPrices.forEach(el => {
-    const usdAttr = el.getAttribute('data-usd');
-    if (usdAttr) {
-      const usdVal = parseFloat(usdAttr.replace(/[^0-9.]/g, ''));
-      const converted = Math.round(usdVal * currObj.rate);
-      el.textContent = `+ ${currObj.symbol}${converted.toLocaleString()}`;
+    const inrAttr = el.getAttribute('data-inr');
+    if (inrAttr) {
+      const inrVal = parseFloat(inrAttr.replace(/[^0-9.]/g, ''));
+      const converted = Math.round(inrVal * currObj.rate);
+      el.textContent = `+ ${currObj.symbol}${converted.toLocaleString()}${currObj.suffix}`;
     }
   });
 
-  // Recalculate Range Slider & Calculator
+  // Recalculate Range Slider & Calculator Output
   recalculatePrice();
 }
 
@@ -68,40 +87,46 @@ function setCalcType(type) {
   recalculatePrice();
 }
 
-// Main Calculator Engine
+// Main Calculator Engine (INR Baseline)
 function recalculatePrice() {
   const pageSlider = document.getElementById('pageSlider');
   const pageCount = parseInt(pageSlider.value, 10);
-  document.getElementById('pageCountLabel').textContent = `${pageCount} Page${pageCount > 1 ? 's' : ''}`;
-  document.getElementById('summaryPagesCount').textContent = `${pageCount} Pages`;
-
-  // Base Prices in USD
-  let basePriceUsd = (currentCalcType === 'simple') ? 299 : 599;
-
-  // Extra pages beyond base (includes 3 pages)
-  if (pageCount > 3) {
-    const extraPages = pageCount - 3;
-    const pricePerPage = (currentCalcType === 'simple') ? 30 : 50;
-    basePriceUsd += extraPages * pricePerPage;
+  
+  if (currentCalcType === 'simple') {
+    document.getElementById('pageCountLabel').textContent = `${pageCount} Page${pageCount > 1 ? 's' : ''}`;
+    document.getElementById('summaryPagesCount').textContent = `${pageCount} Pages`;
+  } else {
+    const productScale = pageCount * 20; // 20 to 200 products
+    document.getElementById('pageCountLabel').textContent = `Up to ${productScale} Products`;
+    document.getElementById('summaryPagesCount').textContent = `Up to ${productScale} Products`;
   }
 
-  // Addons
-  if (document.getElementById('addonPayment').checked) basePriceUsd += 100;
-  if (document.getElementById('addonRush').checked) basePriceUsd += 150;
-  if (document.getElementById('addonDomain').checked) basePriceUsd += 50;
-  if (document.getElementById('addonSeo').checked) basePriceUsd += 80;
+  // Base Prices in INR
+  let basePriceInr = (currentCalcType === 'simple') ? 10000 : 75000;
 
-  // Currency Conversion
+  // Extra pages/scale beyond baseline
+  if (pageCount > 3) {
+    const extraUnits = pageCount - 3;
+    const unitPrice = (currentCalcType === 'simple') ? 1500 : 15000;
+    basePriceInr += extraUnits * unitPrice;
+  }
+
+  // Addon Selections (REVISED USER PRICING)
+  if (document.getElementById('addonDomain').checked) basePriceInr += 5000; // Custom Domain Setup - Rs 5000
+  if (document.getElementById('addonPayment').checked) basePriceInr += 5000; // New Payment Integration - Rs 5000
+  if (document.getElementById('addonRush').checked) basePriceInr += 25000; // Rush Hour Delivery - Rs 25000
+
+  // Currency Conversion Calculation
   const currObj = CURRENCIES[currentCurrency];
-  const finalPrice = Math.round(basePriceUsd * currObj.rate);
+  const finalPrice = Math.round(basePriceInr * currObj.rate);
 
-  // Update Price Display
-  document.getElementById('calcPriceDisplay').textContent = `${currObj.symbol}${finalPrice.toLocaleString()}`;
+  // Display Total Price
+  document.getElementById('calcPriceDisplay').textContent = `${currObj.symbol}${finalPrice.toLocaleString()}${currObj.suffix}`;
 
-  // Estimate Timeline
-  let baseDays = (currentCalcType === 'simple') ? 3 : 6;
-  if (pageCount > 5) baseDays += 2;
-  if (document.getElementById('addonRush').checked) baseDays = Math.max(2, baseDays - 2);
+  // Estimate Timeline Calculation
+  let baseDays = (currentCalcType === 'simple') ? 7 : 12;
+  if (pageCount > 5) baseDays += 5;
+  if (document.getElementById('addonRush').checked) baseDays = Math.max(3, baseDays - 4);
 
   document.getElementById('calcTimelineDisplay').textContent = `${baseDays} Days`;
 }
@@ -124,17 +149,18 @@ function filterPortfolio(category, btnElement) {
 }
 
 // Select Package Trigger
-function selectPackage(packageName, baseUsd) {
+function selectPackage(packageName, baseInr) {
   const serviceSelect = document.getElementById('serviceSelect');
-  if (packageName.includes('Ecommerce')) {
-    serviceSelect.value = 'Ecommerce Store';
-  } else if (packageName.includes('VIP')) {
-    serviceSelect.value = 'Custom Project';
-  } else {
-    serviceSelect.value = 'Simple Website';
+  
+  // Set matching select option
+  for (let option of serviceSelect.options) {
+    if (option.value.toLowerCase().includes(packageName.toLowerCase().split(' ')[0])) {
+      serviceSelect.value = option.value;
+      break;
+    }
   }
 
-  document.getElementById('clientMessage').value = `Hi Sandhya, I would like to order the "${packageName}" package!`;
+  document.getElementById('clientMessage').value = `Hi Sandhya (+91 7530989390), I would like to book the "${packageName}" package!`;
   openModal();
 }
 
@@ -142,10 +168,9 @@ function selectPackage(packageName, baseUsd) {
 function claimCalculatedQuote() {
   const typeName = document.getElementById('summaryTypeName').textContent;
   const price = document.getElementById('calcPriceDisplay').textContent;
-  const pages = document.getElementById('summaryPagesCount').textContent;
+  const scope = document.getElementById('summaryPagesCount').textContent;
 
-  document.getElementById('serviceSelect').value = typeName.includes('Ecommerce') ? 'Ecommerce Store' : 'Simple Website';
-  document.getElementById('clientMessage').value = `Hi Sandhya, I calculated an estimated quote for a ${typeName} (${pages}) for ${price}. Let me reserve a slot!`;
+  document.getElementById('clientMessage').value = `Hi Sandhya, I calculated an estimated quote for a ${typeName} (${scope}) for ${price}. Let's discuss and reserve a slot!`;
   openModal();
 }
 
@@ -158,7 +183,7 @@ function closeModal() {
   document.getElementById('quoteModal').classList.remove('active');
 }
 
-// Lead Form Handler & WhatsApp Redirect Fallback
+// Lead Form Submission Handler (WhatsApp Direct Trigger to +91 7530989390)
 function handleFormSubmit(event) {
   event.preventDefault();
   const name = document.getElementById('clientName').value;
@@ -167,12 +192,37 @@ function handleFormSubmit(event) {
   const message = document.getElementById('clientMessage').value;
 
   const encodedMsg = encodeURIComponent(
-    `Hi Sandhya! My name is ${name} (${email}). I'm interested in: ${service}.\n\nMessage: ${message}`
+    `Hi Sandhya! My name is ${name} (${email}).\nI am interested in: ${service}.\n\nMessage: ${message}`
   );
 
-  // Redirect directly to WhatsApp with pre-filled lead details!
-  window.open(`https://wa.me/919876543210?text=${encodedMsg}`, '_blank');
+  // Redirect directly to WhatsApp with pre-filled details!
+  window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodedMsg}`, '_blank');
   
-  alert(`Thank you ${name}! Your inquiry has been submitted. Opening WhatsApp chat with Sandhya...`);
   closeModal();
+}
+
+// Social Proof Toast Notification Cycle
+function initSocialProofToasts() {
+  const toasts = [
+    "🔥 Rohan from Mumbai just booked an Ecommerce Core store!",
+    "⚡ Ananya from Delhi reserved a Growth Business Website!",
+    "🚀 Kabir from Bangalore inquired about 'Your Mechanic' maintenance!"
+  ];
+
+  let toastIndex = 0;
+  const toastEl = document.getElementById('toastNotification');
+  const toastText = document.getElementById('toastText');
+
+  if (!toastEl) return;
+
+  setInterval(() => {
+    toastText.textContent = toasts[toastIndex];
+    toastEl.classList.add('active');
+
+    setTimeout(() => {
+      toastEl.classList.remove('active');
+    }, 4000);
+
+    toastIndex = (toastIndex + 1) % toasts.length;
+  }, 14000);
 }

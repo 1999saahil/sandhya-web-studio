@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sandhya Web Studio | High-Converting E-Commerce & Business Websites</title>
-  <meta name="description" content="Custom high-converting E-Commerce stores and sleek business websites built for Gen Z & modern brands. Instant transparent quote calculator & 3-7 day delivery.">
+  <meta name="description" content="Custom high-converting E-Commerce stores and sleek business websites built for Gen Z & modern brands by Sandhya. Instant price calculator & WhatsApp support.">
   <link rel="stylesheet" href="styles.css">
   <!-- FontAwesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,29 +18,33 @@
       <span class="brand-name">Sandhya<span class="gradient-text">Studio</span></span>
     </a>
 
-    <ul class="nav-links">
-      <li><a href="#packages" class="nav-link">Packages</a></li>
-      <li><a href="#calculator" class="nav-link">Price Calculator</a></li>
-      <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-      <li><a href="#why-us" class="nav-link">Why Sandhya</a></li>
-      <li><a href="#reviews" class="nav-link">Reviews</a></li>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#packages" class="nav-link" onclick="closeMobileMenu()">Packages</a></li>
+      <li><a href="#calculator" class="nav-link" onclick="closeMobileMenu()">Price Calculator</a></li>
+      <li><a href="#portfolio" class="nav-link" onclick="closeMobileMenu()">Portfolio</a></li>
+      <li><a href="#why-us" class="nav-link" onclick="closeMobileMenu()">Why Sandhya</a></li>
+      <li><a href="#reviews" class="nav-link" onclick="closeMobileMenu()">Reviews</a></li>
     </ul>
 
     <div class="nav-right-actions">
-      <!-- Multi-Currency Dropdown Selector -->
+      <!-- Multi-Currency Dropdown Selector (Default INR) -->
       <div class="currency-selector-wrapper" title="Select currency">
         <i class="fa-solid fa-globe" style="color: var(--primary-violet); font-size: 0.85rem;"></i>
         <label for="currencySelect">Currency:</label>
         <select id="currencySelect" class="currency-select" onchange="updateCurrency(this.value)">
-          <option value="USD" selected>USD ($)</option>
-          <option value="INR">INR (₹)</option>
+          <option value="INR" selected>INR (₹)</option>
+          <option value="USD">USD ($)</option>
           <option value="EUR">EUR (€)</option>
           <option value="GBP">GBP (£)</option>
         </select>
       </div>
 
       <button onclick="openModal()" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.88rem;">
-        Get Started <i class="fa-solid fa-arrow-right"></i>
+        Get Quote <i class="fa-solid fa-arrow-right"></i>
+      </button>
+
+      <button class="mobile-toggle-btn" onclick="toggleMobileMenu()">
+        <i class="fa-solid fa-bars"></i>
       </button>
     </div>
   </nav>
@@ -49,7 +53,7 @@
   <section class="hero">
     <div class="container">
       
-      <!-- Live Spots Availability Badge -->
+      <!-- Live Availability Badge -->
       <div class="hero-tag">
         <div class="pulse-badge">
           <span class="dot-pulse"></span>
@@ -60,23 +64,23 @@
       <!-- Main Headline -->
       <h1 class="hero-title">
         Websites That Don't Suck. <br>
-        <span class="gradient-text">Built to Convert Visitors into Buyers.</span>
+        <span class="gradient-text">Built to Turn Gen Z Browsers into Buyers.</span>
       </h1>
 
       <p class="hero-subtitle">
-        Hi, I'm Sandhya! I craft custom high-converting <strong>E-Commerce stores</strong> and <strong>sleek business websites</strong> tailored for Gen Z & modern brands. Fast delivery, transparent pricing, zero tech jargon.
+        Hi, I'm Sandhya! I craft ultra-fast <strong>E-Commerce online stores</strong> & <strong>high-converting business websites</strong> with modern dark glassmorphism, instant loading, and zero fluff. Designed to scale your sales seamlessly.
       </p>
 
       <!-- CTA Action Group -->
       <div class="hero-cta-group">
         <a href="#calculator" class="btn btn-primary">
-          <i class="fa-solid fa-calculator"></i> Calculate Instant Price
+          <i class="fa-solid fa-calculator"></i> Instant Price Calculator
         </a>
-        <a href="https://wa.me/919876543210?text=Hi%20Sandhya!%20I'm%20interested%20in%20building%20a%20website%20for%20my%20business." target="_blank" class="btn btn-whatsapp">
-          <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+        <a href="https://wa.me/917530989390?text=Hi%20Sandhya!%20I'm%20interested%20in%20building%20a%20website%20for%20my%20business." target="_blank" class="btn btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp (+91 7530989390)
         </a>
         <a href="#portfolio" class="btn btn-secondary">
-          <i class="fa-solid fa-eye"></i> View Live Demos
+          <i class="fa-solid fa-eye"></i> View Featured Work
         </a>
       </div>
 
@@ -84,132 +88,167 @@
       <div class="hero-trust-bar">
         <div class="trust-item"><i class="fa-solid fa-bolt trust-icon"></i> 0.4s Ultra-Fast Load</div>
         <div class="trust-item"><i class="fa-solid fa-mobile-screen trust-icon"></i> 100% Mobile Optimized</div>
-        <div class="trust-item"><i class="fa-solid fa-clock trust-icon"></i> 3 to 7 Day Delivery</div>
-        <div class="trust-item"><i class="fa-solid fa-shield-halved trust-icon"></i> 100% Satisfaction Guarantee</div>
+        <div class="trust-item"><i class="fa-solid fa-boxes-stacked trust-icon"></i> Up to 200 Products</div>
+        <div class="trust-item"><i class="fa-solid fa-wrench trust-icon"></i> 'Your Mechanic' Maintenance</div>
       </div>
 
-      <!-- Hero Mockup Display -->
+      <!-- FIXED Hero Mockup Display -->
       <div class="hero-mockup-wrap">
         <div class="hero-mockup-card">
           <div class="mockup-header-bar">
             <span class="dot-btn dot-red"></span>
             <span class="dot-btn dot-yellow"></span>
             <span class="dot-btn dot-green"></span>
-            <div class="mockup-url">https://sandhya.studio/live-demo</div>
+            <div class="mockup-url">https://sandhya.studio/live-ecommerce-demo</div>
           </div>
-          <img src="assets/ecommerce_showcase.jpg" alt="High Converting E-Commerce Showcase" class="hero-mockup-img" id="heroMockupImg">
+          <div class="hero-mockup-img-container">
+            <img src="assets/ecommerce_showcase.jpg" alt="High Converting E-Commerce Showcase" class="hero-mockup-img" id="heroMockupImg">
+          </div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- Package Tiers Section -->
+  <!-- Package Tiers Section (6 Packages) -->
   <section class="packages-section" id="packages">
     <div class="container">
       <div class="section-header">
         <span class="section-badge">Transparent Pricing</span>
         <h2 class="section-title">Select Your <span class="gradient-text">Website Package</span></h2>
-        <p class="section-desc">Choose from 4 tailored packages designed for every stage of your business growth.</p>
+        <p class="section-desc">Choose from 6 tailored packages for every stage of your business growth and ongoing support.</p>
       </div>
 
       <div class="packages-grid">
 
-        <!-- Tier 1: Starter -->
+        <!-- 5.1 Starter - Website -->
         <div class="glass-panel package-card">
           <div class="pkg-icon">⚡</div>
           <h3 class="pkg-name">Starter Website</h3>
-          <p class="pkg-target">Perfect for personal brands, freelancers & simple 1-page business presences.</p>
+          <p class="pkg-target">Perfect for Personal Brands, Freelancers & Simple Business presences.</p>
           <div class="pkg-price-wrap">
-            <span class="pkg-price" data-usd="299" data-inr="14999" data-eur="279" data-gbp="239">$299</span>
-            <div class="pkg-delivery">🚀 Ready in 3 Days</div>
+            <span class="pkg-price" data-inr="5000" data-usd="65" data-eur="60" data-gbp="50">Rs 5,000/-</span>
+            <div class="pkg-delivery">🚀 Ready in 5-7 Days</div>
           </div>
           <ul class="pkg-features-list">
-            <li class="pkg-feature-item check-icon">1-Page High-Impact Landing Page</li>
+            <li class="pkg-feature-item check-icon">1-Page High-Impact Website</li>
             <li class="pkg-feature-item check-icon">100% Mobile Responsive</li>
-            <li class="pkg-feature-item check-icon">WhatsApp & Contact Form Integration</li>
+            <li class="pkg-feature-item check-icon">WhatsApp Integration</li>
             <li class="pkg-feature-item check-icon">Basic SEO & Speed Optimization</li>
-            <li class="pkg-feature-item check-icon">Free Hosting Setup on GitHub Pages</li>
           </ul>
-          <button onclick="selectPackage('Starter Website', 299)" class="btn btn-secondary">Select Starter</button>
+          <button onclick="selectPackage('Starter Website', 5000)" class="btn btn-secondary">Select Starter</button>
         </div>
 
-        <!-- Tier 2: Growth (Popular) -->
+        <!-- 5.2 Growth Business -->
         <div class="glass-panel package-card popular">
           <span class="popular-badge">Most Popular</span>
           <div class="pkg-icon">🚀</div>
           <h3 class="pkg-name">Growth Business</h3>
-          <p class="pkg-target">Ideal for growing service businesses wanting multi-page presentation & leads.</p>
+          <p class="pkg-target">Ideal for Growing Service Businesses wanting Multi-Page Presentation & Leads.</p>
           <div class="pkg-price-wrap">
-            <span class="pkg-price" data-usd="499" data-inr="24999" data-eur="459" data-gbp="399">$499</span>
-            <div class="pkg-delivery">⚡ Ready in 5 Days</div>
+            <span class="pkg-price" data-inr="10000" data-usd="130" data-eur="120" data-gbp="100">Rs 10,000/-</span>
+            <div class="pkg-delivery">⚡ Ready in 7-10 Days</div>
           </div>
           <ul class="pkg-features-list">
-            <li class="pkg-feature-item check-icon">Up to 5 Custom Pages (Home, About, Services, FAQ, Contact)</li>
+            <li class="pkg-feature-item check-icon">3-5 Custom Pages</li>
             <li class="pkg-feature-item check-icon">Gen Z Glassmorphic Modern UI</li>
-            <li class="pkg-feature-item check-icon">Interactive Contact & Lead Capture</li>
-            <li class="pkg-feature-item check-icon">Google Analytics & Speed Tuning</li>
-            <li class="pkg-feature-item check-icon">Custom Domain & SSL Setup</li>
+            <li class="pkg-feature-item check-icon">Interactive Lead Capture</li>
+            <li class="pkg-feature-item check-icon">100% Mobile Responsive</li>
           </ul>
-          <button onclick="selectPackage('Growth Business', 499)" class="btn btn-primary">Select Growth</button>
+          <button onclick="selectPackage('Growth Business', 10000)" class="btn btn-primary">Select Growth</button>
         </div>
 
-        <!-- Tier 3: Ecommerce Core (Popular) -->
+        <!-- 5.3 Ecommerce Core 1 -->
         <div class="glass-panel package-card popular">
           <span class="popular-badge">High Conversion</span>
           <div class="pkg-icon">🛍️</div>
-          <h3 class="pkg-name">Ecommerce Core</h3>
-          <p class="pkg-target">Built for brands selling online with product catalogs & online checkout.</p>
+          <h3 class="pkg-name">Ecommerce Core 1</h3>
+          <p class="pkg-target">Built for brands selling online with product catalogs (Up to 50 Products) & online checkout.</p>
           <div class="pkg-price-wrap">
-            <span class="pkg-price" data-usd="799" data-inr="39999" data-eur="739" data-gbp="639">$799</span>
-            <div class="pkg-delivery">🔥 Ready in 7 Days</div>
+            <span class="pkg-price" data-inr="75000" data-usd="950" data-eur="870" data-gbp="750">Upto Rs 75,000/-</span>
+            <div class="pkg-delivery">🔥 Ready in 10-15 Days</div>
           </div>
           <ul class="pkg-features-list">
-            <li class="pkg-feature-item check-icon">Full E-Commerce Store (Up to 25 Products)</li>
-            <li class="pkg-feature-item check-icon">Stripe / Razorpay Payment Integration</li>
-            <li class="pkg-feature-item check-icon">Shopping Cart & Direct WhatsApp Orders</li>
-            <li class="pkg-feature-item check-icon">Inventory & Category Management</li>
+            <li class="pkg-feature-item check-icon">Full E-Commerce Store (Up to 50 Products)</li>
+            <li class="pkg-feature-item check-icon">Payment Integration</li>
+            <li class="pkg-feature-item check-icon">Shopping Cart</li>
             <li class="pkg-feature-item check-icon">High-Conversion Checkout Flow</li>
           </ul>
-          <button onclick="selectPackage('Ecommerce Core', 799)" class="btn btn-primary">Select Ecommerce</button>
+          <button onclick="selectPackage('Ecommerce Core 1', 75000)" class="btn btn-primary">Select Core 1</button>
         </div>
 
-        <!-- Tier 4: Custom VIP Studio -->
+        <!-- 5.4 Ecommerce Core 2 -->
         <div class="glass-panel package-card">
-          <div class="pkg-icon">👑</div>
-          <h3 class="pkg-name">Custom VIP Studio</h3>
-          <p class="pkg-target">For scale-ups needing bespoke animations, custom APIs & dedicated support.</p>
+          <div class="pkg-icon">💎</div>
+          <h3 class="pkg-name">Ecommerce Core 2</h3>
+          <p class="pkg-target">Built for brands selling online with product catalogs (Up to 100 Products) & online checkout.</p>
           <div class="pkg-price-wrap">
-            <span class="pkg-price" data-usd="1299" data-inr="64999" data-eur="1199" data-gbp="1049">$1299</span>
-            <div class="pkg-delivery">💎 Priority 10-12 Days</div>
+            <span class="pkg-price" data-inr="150000" data-usd="1900" data-eur="1750" data-gbp="1500">Upto Rs 150,000/-</span>
+            <div class="pkg-delivery">⚡ Ready in 15-20 Days</div>
           </div>
           <ul class="pkg-features-list">
-            <li class="pkg-feature-item check-icon">Unlimited Pages & Complex Layouts</li>
-            <li class="pkg-feature-item check-icon">Custom Interactive WebGL / Animations</li>
-            <li class="pkg-feature-item check-icon">CRM & Third-Party API Integrations</li>
-            <li class="pkg-feature-item check-icon">1-on-1 Strategy & CRO Consultation</li>
-            <li class="pkg-feature-item check-icon">30 Days Post-Launch VIP Support</li>
+            <li class="pkg-feature-item check-icon">Full E-Commerce Store (Up to 100 Products)</li>
+            <li class="pkg-feature-item check-icon">Payment Integration</li>
+            <li class="pkg-feature-item check-icon">Shopping Cart & Premium Templates</li>
+            <li class="pkg-feature-item check-icon">High-Conversion Checkout Flow & Filters</li>
           </ul>
-          <button onclick="selectPackage('Custom VIP Studio', 1299)" class="btn btn-secondary">Select VIP</button>
+          <button onclick="selectPackage('Ecommerce Core 2', 150000)" class="btn btn-secondary">Select Core 2</button>
+        </div>
+
+        <!-- 5.5 Ecommerce Core 3 -->
+        <div class="glass-panel package-card">
+          <div class="pkg-icon">👑</div>
+          <h3 class="pkg-name">Ecommerce Core 3</h3>
+          <p class="pkg-target">Built for brands selling online with product catalogs (Up to 200 Products) & online checkout.</p>
+          <div class="pkg-price-wrap">
+            <span class="pkg-price" data-inr="250000" data-usd="3100" data-eur="2900" data-gbp="2500">Upto Rs 250,000/-</span>
+            <div class="pkg-delivery">👑 Ready in 30-40 Days</div>
+          </div>
+          <ul class="pkg-features-list">
+            <li class="pkg-feature-item check-icon">Full E-Commerce Store (Up to 200 Products)</li>
+            <li class="pkg-feature-item check-icon">Multiple Payment Integration</li>
+            <li class="pkg-feature-item check-icon">Shopping Cart & Premium Templates</li>
+            <li class="pkg-feature-item check-icon">High-Conversion Checkout Flow</li>
+            <li class="pkg-feature-item check-icon">Inventory Management & Product Filters</li>
+          </ul>
+          <button onclick="selectPackage('Ecommerce Core 3', 250000)" class="btn btn-secondary">Select Core 3</button>
+        </div>
+
+        <!-- 5.6 Your Mechanic (Maintenance) -->
+        <div class="glass-panel package-card">
+          <div class="pkg-icon">🔧</div>
+          <h3 class="pkg-name">Your Mechanic</h3>
+          <p class="pkg-target">Maintain your website, keep them running & upgrade them!</p>
+          <div class="pkg-price-wrap">
+            <span class="pkg-price" data-inr="15000" data-usd="190" data-eur="175" data-gbp="150">Rs 15,000/+</span>
+            <div class="pkg-delivery">🛠️ Ongoing Support & Upgrades</div>
+          </div>
+          <ul class="pkg-features-list">
+            <li class="pkg-feature-item check-icon">Add / Delete Basic Products</li>
+            <li class="pkg-feature-item check-icon">Templates & Security Updates</li>
+            <li class="pkg-feature-item check-icon">Fixing Content & Custom Updates</li>
+            <li class="pkg-feature-item check-icon">Priority Direct WhatsApp Assistance</li>
+          </ul>
+          <button onclick="selectPackage('Your Mechanic', 15000)" class="btn btn-secondary">Select Mechanic</button>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Interactive Cost & Scope Calculator Section -->
+  <!-- Interactive Price Calculator Section (UPDATED ADD-ONS) -->
   <section class="calculator-section" id="calculator">
     <div class="container">
       <div class="section-header">
         <span class="section-badge">Instant Scope Tool</span>
         <h2 class="section-title">Calculate Your <span class="gradient-text-cyan">Exact Project Cost</span></h2>
-        <p class="section-desc">Adjust the parameters below to get a transparent price quote in real-time.</p>
+        <p class="section-desc">Adjust parameters below to calculate transparent pricing tailored to your requirements.</p>
       </div>
 
       <div class="glass-panel calculator-card">
         <div class="calc-grid">
           
-          <!-- Left Column: Inputs & Toggles -->
+          <!-- Left Column: Inputs & Addons -->
           <div class="calc-inputs-col">
             
             <!-- Type Selector -->
@@ -228,49 +267,41 @@
             <!-- Page Count Slider -->
             <div class="calc-group">
               <div class="calc-label">
-                <span>2. Number of Pages</span>
+                <span>2. Number of Pages / Products Scale</span>
                 <span id="pageCountLabel" style="color: var(--accent-cyan); font-weight: 800;">3 Pages</span>
               </div>
               <div class="range-slider-wrap">
-                <input type="range" min="1" max="15" value="3" class="range-slider" id="pageSlider" oninput="recalculatePrice()">
+                <input type="range" min="1" max="10" value="3" class="range-slider" id="pageSlider" oninput="recalculatePrice()">
               </div>
             </div>
 
-            <!-- Custom Addon Toggles -->
+            <!-- Custom Addon Toggles (REVISED AS REQUESTED) -->
             <div class="calc-group">
-              <div class="calc-label">3. Select Add-on Features</div>
+              <div class="calc-label">3. Select Add-on Services</div>
               <div class="addons-list">
                 
                 <label class="addon-checkbox-card">
                   <div class="addon-info">
-                    <span class="addon-title">Payment Gateway Setup</span>
-                    <span class="addon-price" data-usd="+ $100" data-inr="+ ₹5,000" data-eur="+ €90" data-gbp="+ £80">+ $100</span>
-                  </div>
-                  <input type="checkbox" id="addonPayment" onchange="recalculatePrice()">
-                </label>
-
-                <label class="addon-checkbox-card">
-                  <div class="addon-info">
-                    <span class="addon-title">Rush 48-Hour Express Delivery</span>
-                    <span class="addon-price" data-usd="+ $150" data-inr="+ ₹7,500" data-eur="+ €135" data-gbp="+ £120">+ $150</span>
-                  </div>
-                  <input type="checkbox" id="addonRush" onchange="recalculatePrice()">
-                </label>
-
-                <label class="addon-checkbox-card">
-                  <div class="addon-info">
-                    <span class="addon-title">Custom Domain & Business Email Setup</span>
-                    <span class="addon-price" data-usd="+ $50" data-inr="+ ₹2,500" data-eur="+ €45" data-gbp="+ £40">+ $50</span>
+                    <span class="addon-title">Custom Domain Setup</span>
+                    <span class="addon-price" data-inr="+ Rs 5,000/-" data-usd="+ $65" data-eur="+ €60" data-gbp="+ £50">+ Rs 5,000/-</span>
                   </div>
                   <input type="checkbox" id="addonDomain" onchange="recalculatePrice()">
                 </label>
 
                 <label class="addon-checkbox-card">
                   <div class="addon-info">
-                    <span class="addon-title">Advanced SEO & Speed Booster</span>
-                    <span class="addon-price" data-usd="+ $80" data-inr="+ ₹4,000" data-eur="+ €70" data-gbp="+ £65">+ $80</span>
+                    <span class="addon-title">New Payment Integration</span>
+                    <span class="addon-price" data-inr="+ Rs 5,000/-" data-usd="+ $65" data-eur="+ €60" data-gbp="+ £50">+ Rs 5,000/-</span>
                   </div>
-                  <input type="checkbox" id="addonSeo" onchange="recalculatePrice()">
+                  <input type="checkbox" id="addonPayment" onchange="recalculatePrice()">
+                </label>
+
+                <label class="addon-checkbox-card">
+                  <div class="addon-info">
+                    <span class="addon-title">Rush Hour Delivery</span>
+                    <span class="addon-price" data-inr="+ Rs 25,000/-" data-usd="+ $310" data-eur="+ €285" data-gbp="+ £250">+ Rs 25,000/-</span>
+                  </div>
+                  <input type="checkbox" id="addonRush" onchange="recalculatePrice()">
                 </label>
 
               </div>
@@ -278,13 +309,13 @@
 
           </div>
 
-          <!-- Right Column: Live Calculated Output -->
+          <!-- Right Column: Live Output -->
           <div class="calc-summary-box">
             <div>
               <div class="summary-title">Estimated Total Cost</div>
-              <div class="summary-total-price" id="calcPriceDisplay">$399</div>
+              <div class="summary-total-price" id="calcPriceDisplay">Rs 10,000/-</div>
               <div class="summary-timeline">
-                <i class="fa-solid fa-truck-fast"></i> Delivery Time: <span id="calcTimelineDisplay">4 Days</span>
+                <i class="fa-solid fa-truck-fast"></i> Estimated Delivery: <span id="calcTimelineDisplay">7 Days</span>
               </div>
 
               <div class="summary-features-preview">
@@ -293,16 +324,16 @@
                   <strong id="summaryTypeName" style="color: #fff;">Simple Website</strong>
                 </div>
                 <div class="summary-item">
-                  <span>Total Pages:</span>
+                  <span>Total Scope:</span>
                   <strong id="summaryPagesCount" style="color: #fff;">3 Pages</strong>
                 </div>
                 <div class="summary-item">
-                  <span>Mobile Optimization:</span>
-                  <strong style="color: #4ade80;">Included (Free)</strong>
+                  <span>Mobile Responsiveness:</span>
+                  <strong style="color: #4ade80;">100% Included</strong>
                 </div>
                 <div class="summary-item">
-                  <span>GitHub Pages Deploy:</span>
-                  <strong style="color: #4ade80;">Included (Free)</strong>
+                  <span>Direct WhatsApp Support:</span>
+                  <strong style="color: #4ade80;">+91 7530989390</strong>
                 </div>
               </div>
             </div>
@@ -317,7 +348,7 @@
     </div>
   </section>
 
-  <!-- Portfolio Showcase Section -->
+  <!-- Portfolio Showcase Section (FIXED DISPLAY) -->
   <section class="portfolio-section" id="portfolio">
     <div class="container">
       <div class="section-header">
@@ -330,7 +361,7 @@
       <div class="portfolio-filter-bar">
         <button class="filter-btn active" onclick="filterPortfolio('all', this)">All Projects</button>
         <button class="filter-btn" onclick="filterPortfolio('ecommerce', this)">Ecommerce Stores</button>
-        <button class="filter-btn" onclick="filterPortfolio('simple', this)">Simple Business</button>
+        <button class="filter-btn" onclick="filterPortfolio('simple', this)">Simple Websites</button>
       </div>
 
       <div class="portfolio-grid">
@@ -341,13 +372,13 @@
             <img src="assets/ecommerce_showcase.jpg" alt="Streetwear Ecommerce Store" class="portfolio-img">
           </div>
           <div class="portfolio-content">
-            <span class="portfolio-tag">Ecommerce Store</span>
+            <span class="portfolio-tag">Ecommerce Core Store</span>
             <h3 class="portfolio-title">Aura Couture Apparel</h3>
             <div class="portfolio-metric">
               <i class="fa-solid fa-arrow-trend-up"></i> +340% Monthly Sales Growth
             </div>
             <p style="color: var(--text-muted); font-size: 0.9rem;">
-              Custom dark aesthetic streetwear brand with high-speed cart drawer, Shopify / Stripe checkout integration, and 0.4s load speed.
+              Custom dark aesthetic apparel store with 50+ catalog products, instant cart drawer, payment integration, and 0.4s load speed.
             </p>
           </div>
         </div>
@@ -358,13 +389,13 @@
             <img src="assets/simple_website_showcase.jpg" alt="Creative Agency Dashboard" class="portfolio-img">
           </div>
           <div class="portfolio-content">
-            <span class="portfolio-tag">Simple Business</span>
+            <span class="portfolio-tag">Growth Business Website</span>
             <h3 class="portfolio-title">Apex Digital Studio</h3>
             <div class="portfolio-metric">
               <i class="fa-solid fa-bolt"></i> 99/100 Google Speed Score
             </div>
             <p style="color: var(--text-muted); font-size: 0.9rem;">
-              Sleek 4-page glassmorphism corporate agency website with direct WhatsApp lead booking and interactive portfolio filter.
+              Sleek 5-page glassmorphism business website with direct WhatsApp lead booking (+91 7530989390) and interactive service filters.
             </p>
           </div>
         </div>
@@ -373,13 +404,13 @@
     </div>
   </section>
 
-  <!-- Why Sandhya Section (Comparison Table) -->
+  <!-- Expanded Comparison Section (Why Sandhya) -->
   <section class="comparison-section" id="why-us">
     <div class="container">
       <div class="section-header">
-        <span class="section-badge">Why Work With Sandhya</span>
+        <span class="section-badge">Why Choose Sandhya</span>
         <h2 class="section-title">Traditional Agencies vs. <span class="gradient-text">Sandhya Studio</span></h2>
-        <p class="section-desc">Why modern brands choose a dedicated freelance specialist over bloated agencies.</p>
+        <p class="section-desc">Why modern brands choose a dedicated specialist over bloated traditional agencies.</p>
       </div>
 
       <div class="glass-panel comparison-table-wrap">
@@ -395,27 +426,32 @@
             <tr>
               <td><strong>Turnaround Time</strong></td>
               <td>4 to 8 Weeks (Slow)</td>
-              <td class="check"><strong>3 to 7 Days (Fast)</strong></td>
+              <td class="check"><strong>5 to 10 Days (Ultra Fast)</strong></td>
             </tr>
             <tr>
-              <td><strong>Pricing Model</strong></td>
-              <td>Bloated ($3,000 - $10,000+)</td>
-              <td class="check"><strong>Transparent Upfront Rates</strong></td>
+              <td><strong>Transparent Pricing</strong></td>
+              <td>Bloated Invoices ($5,000+)</td>
+              <td class="check"><strong>Upfront Rates (Rs 5,000 - 250,000)</strong></td>
+            </tr>
+            <tr>
+              <td><strong>E-Commerce Scale</strong></td>
+              <td>Rigid Basic Templates</td>
+              <td class="check"><strong>50 to 200+ Products with Filters</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Website Care & Maintenance</strong></td>
+              <td>Ghosted After Handover</td>
+              <td class="check"><strong>'Your Mechanic' Ongoing Support</strong></td>
             </tr>
             <tr>
               <td><strong>Design Aesthetic</strong></td>
-              <td>Outdated Corporate Templates</td>
-              <td class="check"><strong>Gen Z Dark Glassmorphic Modern UI</strong></td>
+              <td>Boring Corporate Look</td>
+              <td class="check"><strong>Gen Z Dark Glassmorphism Modern UI</strong></td>
             </tr>
             <tr>
-              <td><strong>Direct Communication</strong></td>
-              <td>Account Managers & Support Tickets</td>
-              <td class="check"><strong>Direct WhatsApp Access with Sandhya</strong></td>
-            </tr>
-            <tr>
-              <td><strong>Conversion Optimization</strong></td>
-              <td>Basic Layout</td>
-              <td class="check"><strong>Psychology-Backed High CRO Structure</strong></td>
+              <td><strong>Direct Support Channel</strong></td>
+              <td>Support Tickets & Delay</td>
+              <td class="check"><strong>Direct WhatsApp (+91 7530989390)</strong></td>
             </tr>
           </tbody>
         </table>
@@ -436,7 +472,7 @@
         <div class="glass-panel review-card">
           <div class="review-stars">★★★★★</div>
           <p class="review-text">
-            "Sandhya delivered our clothing brand website in just 5 days! The dark glass layout looks incredible and our checkout conversion rate jumped by 45% immediately."
+            "Sandhya delivered our Ecommerce Core store in just 10 days! The dark glass layout looks incredible and our checkout conversion rate jumped by 45% immediately."
           </p>
           <div class="review-author">
             <img src="assets/sandhya_avatar.jpg" alt="Rohan Sharma" class="author-avatar">
@@ -450,7 +486,7 @@
         <div class="glass-panel review-card">
           <div class="review-stars">★★★★★</div>
           <p class="review-text">
-            "Working with Sandhya was so smooth. No tech jargon, instant replies on WhatsApp, and the interactive price calculator matched the exact final quote!"
+            "Working with Sandhya was so smooth. Instant replies on WhatsApp (+91 7530989390), transparent package rates, and 'Your Mechanic' keeps our site updated without hassle."
           </p>
           <div class="review-author">
             <img src="assets/sandhya_avatar.jpg" alt="Ananya Patel" class="author-avatar">
@@ -466,15 +502,34 @@
   </section>
 
   <!-- Floating WhatsApp Action Badge -->
-  <a href="https://wa.me/919876543210?text=Hi%20Sandhya!%20I'm%20interested%20in%20a%20website%20for%20my%20business." target="_blank" class="whatsapp-float" title="Chat directly with Sandhya on WhatsApp">
+  <a href="https://wa.me/917530989390?text=Hi%20Sandhya!%20I'm%20interested%20in%20a%20website%20for%20my%20business." target="_blank" class="whatsapp-float" title="Chat directly with Sandhya on WhatsApp (+91 7530989390)">
     <div class="wa-icon-box">
       <i class="fa-brands fa-whatsapp"></i>
     </div>
     <div class="wa-text-box">
       <span class="wa-title">Chat with Sandhya</span>
-      <span class="wa-status">🟢 Online - Replies in 5 mins</span>
+      <span class="wa-status">🟢 Online: +91 7530989390</span>
     </div>
   </a>
+
+  <!-- Mobile Sticky Bottom Conversion Bar -->
+  <div class="mobile-sticky-bar">
+    <a href="https://wa.me/917530989390?text=Hi%20Sandhya!%20I%20want%20to%20get%20a%20quote%20for%20my%20website." target="_blank" class="btn btn-whatsapp" style="padding: 10px 18px; font-size: 0.85rem; flex: 1;">
+      <i class="fa-brands fa-whatsapp"></i> WhatsApp Me
+    </a>
+    <button onclick="openModal()" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.85rem; flex: 1;">
+      Get Instant Quote
+    </button>
+  </div>
+
+  <!-- Social Proof Notification Toast -->
+  <div class="toast-notification" id="toastNotification">
+    <span style="font-size: 1.2rem;">🔥</span>
+    <div>
+      <strong id="toastText" style="color: #fff; font-size: 0.82rem;">Alex from Delhi just booked an Ecommerce Core store!</strong>
+      <div style="font-size: 0.72rem; color: var(--text-muted);">2 minutes ago</div>
+    </div>
+  </div>
 
   <!-- Lead Booking Modal Popup -->
   <div class="modal-overlay" id="quoteModal">
@@ -482,8 +537,8 @@
       <button class="modal-close-btn" onclick="closeModal()">&times;</button>
       
       <h3 style="font-size: 1.6rem; margin-bottom: 8px;">Let's Build Your Website 🚀</h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">
-        Fill out this quick form or send a message directly on WhatsApp to claim your slot.
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+        Fill out this quick form or send a message directly on WhatsApp (+91 7530989390) to claim your slot.
       </p>
 
       <form id="leadForm" onsubmit="handleFormSubmit(event)">
@@ -493,26 +548,29 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="clientEmail">Your Email / WhatsApp</label>
-          <input type="text" id="clientEmail" class="form-input" placeholder="e.g. alex@brand.com or +1 234 567 890" required>
+          <label class="form-label" for="clientEmail">Your Phone / WhatsApp</label>
+          <input type="text" id="clientEmail" class="form-input" placeholder="e.g. +91 7530989390" required>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="serviceSelect">Service Required</label>
           <select id="serviceSelect" class="form-select">
-            <option value="Simple Website">Simple Business Website</option>
-            <option value="Ecommerce Store">E-Commerce Online Store</option>
-            <option value="Custom Project">Custom VIP Project</option>
+            <option value="Starter Website (Rs 5,000)">Starter Website (Rs 5,000)</option>
+            <option value="Growth Business (Rs 10,000)">Growth Business (Rs 10,000)</option>
+            <option value="Ecommerce Core 1 (Rs 75,000)">Ecommerce Core 1 (Up to 50 Products)</option>
+            <option value="Ecommerce Core 2 (Rs 150,000)">Ecommerce Core 2 (Up to 100 Products)</option>
+            <option value="Ecommerce Core 3 (Rs 250,000)">Ecommerce Core 3 (Up to 200 Products)</option>
+            <option value="Your Mechanic Maintenance">Your Mechanic (Website Maintenance)</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="clientMessage">Project Details / Ideas</label>
+          <label class="form-label" for="clientMessage">Project Details / Requirements</label>
           <textarea id="clientMessage" class="form-textarea" rows="3" placeholder="Tell me about your business and goals..."></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary" style="width: 100%;">
-          Submit Inquiry & Reserve Slot
+          Submit Inquiry & Open WhatsApp (+91 7530989390)
         </button>
       </form>
     </div>
@@ -522,9 +580,12 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-logo">Sandhya<span class="gradient-text">Studio</span></div>
-      <p>Building high-converting E-Commerce & Simple Websites for the next generation of founders.</p>
+      <p>Building high-converting E-Commerce & Simple Websites for modern brands.</p>
+      <p style="margin-top: 10px; font-size: 0.9rem; color: #4ade80;">
+        <i class="fa-brands fa-whatsapp"></i> Direct WhatsApp Support: +91 7530989390
+      </p>
       <p style="margin-top: 16px; font-size: 0.8rem; color: var(--text-subtle);">
-        © <span id="currentYear"></span> Sandhya Web Studio. Designed for maximum conversion. Hosted on GitHub Pages.
+        © <span id="currentYear"></span> Sandhya Web Studio. Hosted on GitHub Pages.
       </p>
     </div>
   </footer>
